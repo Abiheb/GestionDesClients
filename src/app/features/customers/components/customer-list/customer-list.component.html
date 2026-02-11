@@ -1,0 +1,79 @@
+<div class="customer-list-container">
+  <!-- Barre de recherche simplifiée -->
+  <div class="search-bar">
+    <label for="customer-search" class="sr-only">Rechercher un client</label>
+    <input
+      type="text"
+      id="customer-search"
+      placeholder="Rechercher par nom, email ou téléphone…"
+      aria-label="Rechercher un client"
+      (input)="onSearch($any($event.target).value)"
+      class="search-input"
+    />
+  </div>
+
+  <!-- Tableau des clients -->
+  <div class="table-responsive">
+    <table class="customer-table" aria-label="Liste des clients">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Email</th>
+          <th scope="col">Téléphone</th>
+          <th scope="col">Statut</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of (vm$ | async)?.customers; trackBy: trackById">
+          <td>{{ customer.id }}</td>
+          <td>{{ customer.lastName | uppercase }}</td>
+          <td>{{ customer.firstName }}</td>
+          <td><a [href]="'mailto:' + customer.email" class="email-link">{{ customer.email }}</a></td>
+          <td>{{ customer.phone || '—' }}</td>
+          <td>
+            <span 
+              class="status-badge" 
+              [class.status-active]="customer.isActive" 
+              [class.status-inactive]="!customer.isActive"
+              [attr.aria-label]="customer.isActive ? 'Client actif' : 'Client inactif'"
+            >
+              {{ customer.isActive ? 'Actif' : 'Inactif' }}
+            </span>
+          </td>
+          <td class="action-cell">
+            <a 
+              [routerLink]="['/customers', customer.id]"
+              class="btn-edit"
+              [attr.aria-label]="'Modifier le client ' + customer.firstName + ' ' + customer.lastName"
+            >
+            Modifier
+            </a>
+            <button 
+              type="button"
+              (click)="onDelete(customer)"
+              class="btn-delete"
+              [attr.aria-label]="'Supprimer le client ' + customer.firstName + ' ' + customer.lastName"
+            >
+              Supprimer
+            </button>
+          </td>
+        </tr>
+        
+        <!-- État vide -->
+        <tr *ngIf="(vm$ | async)?.customers?.length === 0">
+          <td colspan="7" class="empty-state">
+            <div *ngIf="(vm$ | async)?.searchTerm; else noCustomers">
+              Aucun client trouvé pour "<strong>{{ (vm$ | async)?.searchTerm }}</strong>"
+            </div>
+            <ng-template #noCustomers>
+              Aucun client enregistré
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
