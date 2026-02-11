@@ -1,27 +1,101 @@
-# GestionClients
+#  Gestion Clients - Angular 17
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+Application standalone Angular 17 pour la gestion complète de clients avec architecture feature-based, formulaires réactifs et design responsive.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+-  **Architecture Feature-Based** - Organisation par domaine métier
+-  **100% Standalone Components** - Pas de NgModules
+-  **Reactive Forms** - Validation temps réel avec messages personnalisés
+-  **ChangeDetectionStrategy.OnPush** - Performance optimale
+-  **Typage Strict TypeScript** - Sécurité et maintenabilité
+-  **Recherche Dynamique** - Filtre en temps réel avec RxJS
+-  **Responsive Design** - Mobile, tablette et desktop
+-  **Accessibilité WCAG** - ARIA labels, navigation clavier
+-  **Lazy Loading** - Chargement des features à la demande
 
-## Code scaffolding
+##  Quick Start
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prérequis
 
-## Build
+- Node.js ≥ v18.13.0 ([Download](https://nodejs.org/))
+- npm ≥ v9.0.0
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Installation
+```bash
+# Clone le repository
+git clone https://github.com/votre-username/gestion-clients.git
 
-## Running unit tests
+# Navigue vers le dossier
+cd gestion-clients
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Installe les dépendances
+npm install
+```
 
-## Running end-to-end tests
+### Démarrage
+```bash
+# Démarre le serveur de développement
+npm start
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# Ou avec ouverture automatique du navigateur
+ng serve --open
+```
 
-## Further help
+**Application accessible à :** `http://localhost:4200/customers`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+##  Project Structure
+```
+gestion-clients/
+├── src/
+│   ├── app/
+│   │   ├── core/                    # Fonctionnalités de base
+│   │   │   ├── layout/              # Shell layout (header/footer)
+│   │   │   └── not-found/           # Page 404
+│   │   ├── features/                # Architecture feature-based
+│   │   │   └── customers/           # Feature "Gestion Clients"
+│   │   │       ├── components/      # Composants métier
+│   │   │       │   ├── customer-form/     # Formulaire (CRUD)
+│   │   │       │   └── customer-list/     # Liste avec recherche
+│   │   │       ├── models/          # Interfaces TypeScript
+│   │   │       ├── services/        # Services métier
+│   │   │       └── customers.routes.ts    # Routage feature
+│   │   ├── app.component.ts         # Composant racine
+│   │   └── app.routes.ts            # Routage principal
+│   ├── index.html
+│   └── main.ts                      # Bootstrap de l'application
+├── angular.json
+├── package.json
+└── README.md
+```
+
+##  Routes
+
+| Route | Description | Fonctionnalité |
+|-------|-------------|----------------|
+| `/customers` | Liste des clients | Recherche, suppression |
+| `/customers/new` | Création client | Formulaire avec validation |
+| `/customers/:id` | Édition client | Pré-remplissage des données |
+| `/**` | Page 404 | Gestion erreurs |
+
+##  Scripts Disponibles
+```bash
+# Développement
+npm start              # Démarre le serveur de dev
+
+# Build
+npm run build          # Build de production
+npm run watch          # Build en mode watch
+
+# Tests
+npm test               # Lance les tests unitaires
+```
+
+
+
+
+
+
+---
+
+⭐ **N'oubliez pas de mettre une étoile si ce projet vous a aidé !**
